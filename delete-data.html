@@ -184,12 +184,12 @@
         </form>
 
         <div id="success" class="success" role="status" aria-live="polite">
-          Your delete request has been recorded.
+          Your email app should open with your delete request prefilled.
         </div>
 
         <p class="note">
-          This is a simple request page. Connect the form to your backend or email
-          workflow if you want to store or process submissions automatically.
+          This form opens your email app and prepares a request to
+          datejugaad@gmail.com.
         </p>
       </section>
     </div>
@@ -201,8 +201,27 @@
 
         form.addEventListener("submit", function (event) {
           event.preventDefault();
+          var name = document.getElementById("name").value.trim();
+          var age = document.getElementById("age").value.trim();
+          var reason = document.getElementById("reason").value.trim();
+
+          var subject = "Delete Data Request - Date Jugaad";
+          var body = [
+            "Name: " + name,
+            "Age: " + age,
+            "",
+            "Reason:",
+            reason,
+          ].join("\n");
+
+          var mailtoUrl =
+            "mailto:datejugaad@gmail.com?subject=" +
+            encodeURIComponent(subject) +
+            "&body=" +
+            encodeURIComponent(body);
+
           success.classList.add("visible");
-          form.reset();
+          window.location.href = mailtoUrl;
         });
       })();
     </script>
